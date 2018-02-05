@@ -2,10 +2,17 @@
 #include <vector>
 using namespace std;
 
+
+//typedef char Index[30];
+typedef long int Index;
+
 union ExtraData {
-    char index[30];
+    Index index;
     float pay;
   };
+
+enum Sex {female, male, mysterious };
+
 
 class person
 {
@@ -13,37 +20,35 @@ class person
   string firstName;
   string name;
   char PESEL[11];
-  char sex;
+  Sex sex;
   string address;
-  float pay;
-  string index;
 
-  ExtraData extraData;
+  ExtraData extra;
 
-  person(string firstName = "", string name = "", string index = "");
+  person(string firstName = "", string name = "");
 
 };
 
 //person::person(string firstName = "", string name = "", string index = "")
-person::person(string inFirstName, string inName, string inIndex)
+person::person(string inFirstName, string inName)
 {
   firstName = inFirstName;
   name = inName;
-
-  index = inIndex;
+  extra.index = 0;
+ // extra.index = inIndex;
 }
 
 
 
 bool compare(const person& first, const person& second)
 {
-  return (first.index  < second.index);
+  return (first.extra.index  < second.extra.index);
 }
 
 class persons
 {
  public:
-   void insert_(string firstName, string name, string index);
+   void insert_(string firstName, string name);
    void insert_();
    void show();
    void sort();
@@ -54,9 +59,9 @@ class persons
    vector<person>::iterator it;
 };
 
-void persons::insert_(string firstName, string name, string index)
+void persons::insert_(string firstName, string name)
 {
-  person aperson(firstName, name, index);
+  person aperson(firstName, name);
   persons.push_back(aperson);
 }
 
@@ -69,7 +74,7 @@ void persons::insert_()
   cout << "last name: ";
   cin >> aperson.name;
   cout << "index: ";
-  cin >> aperson.index;
+  cin >> aperson.extra.index;
   cout << endl;
   persons.push_back(aperson);
 }
@@ -77,7 +82,7 @@ void persons::insert_()
 void persons::show()
 {
   for (it=persons.begin(); it!=persons.end(); ++it)
-    cout << it->firstName  << " " << it->name  << ", " << it->index << endl;
+    cout << it->firstName  << " " << it->name  << ", " << it->extra.index << endl;
   cout << endl;
 }
 
@@ -90,10 +95,10 @@ void persons::deleteS()
 {
 
   cout << "index: ";
-  string ind;
+  Index ind;
   cin >> ind;
   for (it=persons.begin(); it!=persons.end(); ++it)
-    if (it->index==ind) {
+    if (it->extra.index==ind) {
       it = persons.erase(it);
       cout << "Record successfully deleted\n";
     }
@@ -103,10 +108,10 @@ int main ()
 {
   persons persons;
 
-  persons.insert_("George", "Harrison", "144442");
-  persons.insert_("Paul", "McCartney", "131312");
-  persons.insert_("Ringo", "Starr", "145965");
-  persons.insert_("John", "Lennon", "140666");
+  persons.insert_("George", "Harrison");//, "144442");
+  persons.insert_("Paul", "McCartney");// "131312");
+  persons.insert_("Ringo", "Starr");//, "145965");
+  persons.insert_("John", "Lennon");//, "140666");
 
   string answer = "";
   do {
