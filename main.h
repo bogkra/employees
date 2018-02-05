@@ -3,16 +3,11 @@ using namespace std;
 //typedef char Index[30];
 typedef long int Index;
 
-union ExtraData {
-    Index index;
-    float pay;
-  };
 
 enum Sex {female, male, mysterious };
 
 
-class person
-{
+class Person {
  public:
   string firstName;
   string name;
@@ -20,8 +15,32 @@ class person
   Sex sex;
   string address;
 
-  ExtraData extra;
-
-  person(string firstName = "", string name = "");
-
+  Person(const string inFirstName = "", const string inName = "");
 };
+
+class Student : public Person {
+ public:
+  Index index;
+};
+
+class Employee : public Person {
+ public:
+  float salary;
+};
+
+
+class Persons
+{
+ public:
+   void insert_(string firstName, string name);
+   void insert_();
+   void show();
+   void sort();
+   void deleteS();
+
+ private:
+   vector<Person> Persons;
+   vector<Person>::iterator it;
+};
+
+

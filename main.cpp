@@ -4,83 +4,66 @@
 
 
 //person::person(string firstName = "", string name = "", string index = "")
-person::person(string inFirstName, string inName)
+Person::Person(const string inFirstName, const string inName)
 {
   firstName = inFirstName;
   name = inName;
-  extra.index = 0;
- // extra.index = inIndex;
+}
+
+
+bool compareInd(const Student& first, const Student& second)
+{
+  return (first.index  < second.index);
 }
 
 
 
-bool compare(const person& first, const person& second)
+void Persons::insert_(string firstName, string name)
 {
-  return (first.extra.index  < second.extra.index);
+  Person aPerson(firstName, name);
+  Persons.push_back(aPerson);
 }
 
-class persons
+void Persons::insert_()
 {
- public:
-   void insert_(string firstName, string name);
-   void insert_();
-   void show();
-   void sort();
-   void deleteS();
-
- private:
-   vector<person> persons;
-   vector<person>::iterator it;
-};
-
-void persons::insert_(string firstName, string name)
-{
-  person aperson(firstName, name);
-  persons.push_back(aperson);
-}
-
-void persons::insert_()
-{
-  person aperson;
+  Person aPerson;
 
   cout << "first name: ";
-  cin >> aperson.firstName;
+  cin >> aPerson.firstName;
   cout << "last name: ";
-  cin >> aperson.name;
-  cout << "index: ";
-  cin >> aperson.extra.index;
+  cin >> aPerson.name;
   cout << endl;
-  persons.push_back(aperson);
+  Persons.push_back(aPerson);
 }
 
-void persons::show()
+void Persons::show()
 {
-  for (it=persons.begin(); it!=persons.end(); ++it)
-    cout << it->firstName  << " " << it->name  << ", " << it->extra.index << endl;
+  for (it=Persons.begin(); it!=Persons.end(); ++it)
+    cout << it->firstName  << " " << it->name  << endl ; //<< ", " << it->extra.index << endl;
   cout << endl;
 }
 
-void persons::sort()
+void Persons::sort()
 {
-//  sort(persons, compare);
+//  sort(Persons, compare);
 }
 
-void persons::deleteS()
+void Persons::deleteS()
 {
 
-  cout << "index: ";
-  Index ind;
-  cin >> ind;
-  for (it=persons.begin(); it!=persons.end(); ++it)
-    if (it->extra.index==ind) {
-      it = persons.erase(it);
-      cout << "Record successfully deleted\n";
-    }
+//  cout << "index: ";
+//  Index ind;
+//  cin >> ind;
+ // for (it=Persons.begin(); it!=Persons.end(); ++it)
+  //  if (it->extra.index==ind) {
+ //     it = Persons.erase(it);
+  //    cout << "Record successfully deleted\n";
+  //  }
 }
 
 int main ()
 {
-  persons persons;
+  Persons persons;
 
   persons.insert_("George", "Harrison");//, "144442");
   persons.insert_("Paul", "McCartney");// "131312");
