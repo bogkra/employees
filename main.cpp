@@ -4,28 +4,24 @@
 
 
 //person::person(string firstName = "", string name = "", string index = "")
-Person::Person(const string inFirstName, const string inName)
-{
+Person::Person(const string inFirstName, const string inName) {
   firstName = inFirstName;
   name = inName;
 }
 
 
-bool compareInd(const Student& first, const Student& second)
-{
+bool compareInd(const Student& first, const Student& second) {
   return (first.index  < second.index);
 }
 
 
 
-void Persons::insert_(string firstName, string name)
-{
+void Persons::insert_(string firstName, string name) {
   Person aPerson(firstName, name);
-  Persons.push_back(aPerson);
+  persons.push_back(aPerson);
 }
 
-void Persons::insert_()
-{
+void Persons::insert_() {
   Person aPerson;
 
   cout << "first name: ";
@@ -33,36 +29,38 @@ void Persons::insert_()
   cout << "last name: ";
   cin >> aPerson.name;
   cout << endl;
-  Persons.push_back(aPerson);
+  persons.push_back(aPerson);
 }
 
-void Persons::show()
-{
-  for (it=Persons.begin(); it!=Persons.end(); ++it)
-    cout << it->firstName  << " " << it->name  << endl ; //<< ", " << it->extra.index << endl;
-  cout << endl;
+void Persons::show() {
+  for (it=persons.begin(); it!=persons.end(); ++it) {
+    cout << it->firstName  << " " << it->name  << " PESEL:" << it->PESEL << (it->sex==male ? ", male" : ", female") << ", address: " << it->address;
+    cout << endl;
+  }
+
+ // cout << endl;
 }
 
-void Persons::sort()
-{
+void Persons::sort() {
 //  sort(Persons, compare);
 }
 
-void Persons::deleteS()
-{
+void Persons::deleteS() {
 
-//  cout << "index: ";
-//  Index ind;
-//  cin >> ind;
- // for (it=Persons.begin(); it!=Persons.end(); ++it)
-  //  if (it->extra.index==ind) {
- //     it = Persons.erase(it);
-  //    cout << "Record successfully deleted\n";
-  //  }
 }
 
-int main ()
-{
+bool Person::validatePESEL() {
+  int p[11];
+  for (int i=0; i<11; i++)
+    p[i] = PESEL[i] - '0';    
+ 
+  return ( ( (9*p[0] + 7*p[1] + 3*p[2] + 1*p[3] + 9*p[4] + 7*p[5] + 3*p[6] + 1*p[7] + 9*p[8] + 7*p[9]  ) % 10 == p[10] )
+           && (p[9] % 2 == (sex == male ? 1 : 0)) );
+
+  // warning: possible more precise validations - day of month, month, date in the future...
+}
+
+int main () {
   Persons persons;
 
   persons.insert_("George", "Harrison");//, "144442");
