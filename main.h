@@ -1,13 +1,18 @@
+#ifndef main_h
+#define main_h
+#include <string>
+
 using namespace std;
 
+//<<<<<<< HEAD
 //typedef char Index[30];
 typedef long int Index;
-typedef char Pesel[11];
+//typedef char Pesel[11];
 
-enum Sex {female, male}; // , mysterious }; ;)
+enum Sex {female, male};
 
 
-class Person {
+/*class Person {
   public:
     string firstName;
     string name;
@@ -47,4 +52,69 @@ class Persons {
     vector<Person>::iterator it;
 };
 
+*/
+//=======
+
+class Person
+{
+public:
+  Person(string firstName, string name, string pesel, Sex sex, string address)
+    : firstName(firstName)
+    , name(name)
+    , pesel(pesel)
+    , sex(sex)
+    , address(address)
+  {
+  }
+  string firstName;
+  string name;
+  string pesel;
+  Sex sex;
+  string address;
+  virtual string occupation() = 0;
+  virtual int number() = 0;
+
+  bool validatePESEL();
+
+};
+
+class Student : public Person
+{
+public:
+  Student(string firstName,
+          string name,
+          string pesel,
+          Sex sex,
+          string address,
+          int number_index)
+    : Person(firstName, name, pesel, sex, address)
+    , number_index(number_index)
+  {
+  }
+  int number_index;
+  string student;// = "Student";
+  int number() { return number_index; }
+  string occupation() { return student; }
+};
+
+class Employee : public Person
+{
+public:
+  Employee(string firstName,
+         string name,
+         string pesel,
+         Sex sex,
+         string address,
+         int pay)
+    : Person(firstName, name, pesel, sex, address)
+    , pay(pay)
+  {
+  }
+  int pay;
+  string employee;// = "Worker";
+  int number() { return pay; }
+  string occupation() { return employee; }
+};
+
+#endif
 

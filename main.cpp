@@ -1,8 +1,10 @@
+#include "main.h"
 #include <iostream>
 #include <vector>
-#include "main.h"
+//<<<<<<< HEAD
+using namespace std;
 
-
+/*
 //person::person(string firstName = "", string name = "", string index = "")
 Person::Person(const string inFirstName, const string inName) {
   firstName = inFirstName;
@@ -49,10 +51,13 @@ void Persons::deleteS() {
 
 }
 
+*/
+
 bool Person::validatePESEL() {
+ // dodac wyjatki!
   int p[11];
   for (int i=0; i<11; i++)
-    p[i] = PESEL[i] - '0';    
+    p[i] = pesel[i] - '0';
  
   return ( ( (9*p[0] + 7*p[1] + 3*p[2] + 1*p[3] + 9*p[4] + 7*p[5] + 3*p[6] + 1*p[7] + 9*p[8] + 7*p[9]  ) % 10 == p[10] )
            && (p[9] % 2 == (sex == male ? 1 : 0)) );
@@ -60,6 +65,7 @@ bool Person::validatePESEL() {
   // warning: possible more precise validations - day of month, month, date in the future...
 }
 
+/*
 int main () {
   Persons persons;
 
@@ -86,6 +92,22 @@ int main () {
 
   cout << "\nend of the program\n";
  // persons.erase();
+=======
+>>>>>>> ec7ec2c420bdf6de79bbefa5f596f50a2fd51c2c
+*/
 
+int main()
+{
+  std::vector<Person*> person;
+  Employee e("Siema", "S", "i", female, "k", 120);
+  Student s("Wojtek", "W", "l", female, "q", 226);
+  Person* wsk;
+  wsk = &e;
+  person.push_back(wsk);
+  wsk = &s;
+  person.push_back(wsk);
+  std::cout << person[0]->occupation() << person[0]->number() << person[0]->sex
+       << endl;
+  std::cout << person[1]->occupation() << person[1]->number() << endl;
   return 0;
 }
