@@ -36,12 +36,25 @@ void show(vector<Person*> m) {
 void Persons::sort() {
 //  sort(Persons, compare);
 }
-
-void Persons::deleteS() {
-
+*/
+void deletePerson(string peselNumberofErase,vector<Person*> &m) {
+	auto it2=m.begin();
+	int i=0;
+  for (auto it=m.begin(); it!=m.end(); it++) {
+  if( peselNumberofErase == m[i]->pesel)
+  {
+  	m.erase(it2+i);
+	return;
+  }
+   if( peselNumberofErase != m[i]->pesel)
+   {
+	   i++;
+   }
+}
+cout << "Lack of pesel!" <<endl;
 }
 
-*/
+
 
 bool Person::validatePESEL() {
  // dodac wyjatki!
@@ -82,6 +95,8 @@ int main()
   Person* wsk1 = new Student("Wojtek", "Witkowik", "12345667", female, "Warszawa", 226);
   person.push_back(wsk);
   person.push_back(wsk1);
+  show(person);
+  deletePerson("12345667",person);
   show(person);
   delete wsk;
   delete wsk1;
