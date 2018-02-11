@@ -5,18 +5,9 @@
 using namespace std;
 
 /*
-//person::person(string firstName = "", string name = "", string index = "")
-Person::Person(const string inFirstName, const string inName) {
-  firstName = inFirstName;
-  name = inName;
-}
-
-
 bool compareInd(const Student& first, const Student& second) {
   return (first.index  < second.index);
 }
-
-
 
 void Persons::insert_(string firstName, string name) {
   Person aPerson(firstName, name);
@@ -33,16 +24,15 @@ void Persons::insert_() {
   cout << endl;
   persons.push_back(aPerson);
 }
-
-void Persons::show() {
-  for (it=persons.begin(); it!=persons.end(); ++it) {
-    cout << it->firstName  << " " << it->name  << " PESEL:" << it->PESEL << (it->sex==male ? ", male" : ", female") << ", address: " << it->address;
-    cout << endl;
+*/
+void show(vector<Person*> m) {
+	int i=0;
+  for (auto it=m.begin(); it!=m.end(); ++it) {
+    cout << m[i]->occupation() << "  " << m[i]->firstName << "  " << m[i]->name << "  " << m[i]->pesel << "  " << m[i]->sex << "  " << m[i]->address << "  " << m[i]->number()<<endl;
+   i++; 
   }
-
- // cout << endl;
 }
-
+/*
 void Persons::sort() {
 //  sort(Persons, compare);
 }
@@ -66,15 +56,7 @@ bool Person::validatePESEL() {
 }
 
 /*
-int main () {
-  Persons persons;
-
-  persons.insert_("George", "Harrison");//, "144442");
-  persons.insert_("Paul", "McCartney");// "131312");
-  persons.insert_("Ringo", "Starr");//, "145965");
-  persons.insert_("John", "Lennon");//, "140666");
-
-  string answer = "";
+ MENU
   do {
       cout << "I=Insert new record  L=show the vector  S=Sort by index  D=Delete by index  Q=Quit" << endl;
       cin >> answer;
@@ -91,23 +73,17 @@ int main () {
   }  while (answer!="Q" && answer!="q") ;
 
   cout << "\nend of the program\n";
- // persons.erase();
-=======
->>>>>>> ec7ec2c420bdf6de79bbefa5f596f50a2fd51c2c
 */
 
 int main()
 {
   std::vector<Person*> person;
-  Employee e("Siema", "S", "i", female, "k", 120);
-  Student s("Wojtek", "W", "l", female, "q", 226);
-  Person* wsk;
-  wsk = &e;
+  Person* wsk = new Employee("Siema", "Kowalski", "89000000", female, "Wrocław", 2310);
+  Person* wsk1 = new Student("Wojtek", "Witkowik", "12345667", female, "Warszawa", 226);
   person.push_back(wsk);
-  wsk = &s;
-  person.push_back(wsk);
-  std::cout << person[0]->occupation() << person[0]->number() << person[0]->sex
-       << endl;
-  std::cout << person[1]->occupation() << person[1]->number() << endl;
+  person.push_back(wsk1);
+  show(person);
+  delete wsk;
+  delete wsk1;
   return 0;
 }

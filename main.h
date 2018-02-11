@@ -92,7 +92,7 @@ public:
   {
   }
   int number_index;
-  string student;// = "Student";
+  string student = "Student";
   int number() { return number_index; }
   string occupation() { return student; }
 };
@@ -111,7 +111,7 @@ public:
   {
   }
   int pay;
-  string employee;// = "Worker";
+  string employee = "Employee";
   int number() { return pay; }
   string occupation() { return employee; }
 };
