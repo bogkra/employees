@@ -1,7 +1,7 @@
 #include "employee.hpp"
+#include "functions.hpp"
 #include "person.hpp"
 #include "student.hpp"
-#include "functions.hpp"
 #include <iostream>
 #include <vector>
 //<<<<<<< HEAD
@@ -20,8 +20,8 @@ main()
   show(person);
   deletePerson("12345667", person);
   show(person);
-  findPersonpesel("89000000",person);
-  findPersonsurname("Witkowik",person);
+  findPersonpesel("89000000", person);
+  findPersonsurname("Witkowik", person);
   delete wsk;
   delete wsk1;
   return 0;

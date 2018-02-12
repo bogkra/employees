@@ -1,8 +1,8 @@
 #ifndef functions_hpp
 #define functions_hpp
+#include "person.hpp"
 #include <iostream>
 #include <string>
-#include "person.hpp"
 #include <vector>
 
 using namespace std;
