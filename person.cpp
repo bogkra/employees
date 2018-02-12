@@ -12,3 +12,21 @@ Person::Person(string firstName,
   , address(address)
 {
 }
+
+bool
+Person::validatePESEL()
+{
+  // dodac wyjatki!
+  int p[11];
+  for (int i = 0; i < 11; i++)
+    p[i] = pesel[i] - '0';
+
+  return (((9 * p[0] + 7 * p[1] + 3 * p[2] + 1 * p[3] + 9 * p[4] + 7 * p[5] +
+            3 * p[6] + 1 * p[7] + 9 * p[8] + 7 * p[9]) %
+             10 ==
+           p[10]) &&
+          (p[9] % 2 == (sex == male ? 1 : 0)));
+
+  // warning: possible more precise validations - day of month, month, date in
+  // the future...
+}
