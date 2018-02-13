@@ -19,10 +19,13 @@ main()
   person.push_back(wsk);
   person.push_back(wsk1);
   show(person);
-  deletePerson("12345667", person);
+  deletePerson("123456", person);
   show(person);
   findPersonpesel("89000000", person);
   findPersonsurname("Witkowik", person);
   save(person);
+  downloadDatabase(person);
+  cout << "After download";
+  show(person);
   return 0;
 }
