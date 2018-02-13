@@ -22,6 +22,7 @@ main()
   show(person);
   findPersonpesel("89000000", person);
   findPersonsurname("Witkowik", person);
+  save(person);
   delete wsk;
   delete wsk1;
   return 0;

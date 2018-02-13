@@ -1,6 +1,24 @@
 #include "functions.hpp"
 
 void
+save(vector<Person*>& m)
+{
+  fstream plik("plik.txt", ios::out);
+  if (plik.good()) {
+    plik << "Database:" << endl;
+    int i = 0;
+    for (auto it = m.begin(); it != m.end(); ++it) {
+      plik << m[i]->occupation() << "  " << m[i]->firstName << "  "
+           << m[i]->name << "  " << m[i]->pesel << "  " << m[i]->sex << "  "
+           << m[i]->address << "  " << m[i]->number() << endl;
+      i++;
+      plik.flush();
+    }
+    plik.close();
+  }
+}
+
+void
 show(vector<Person*> m)
 {
   cout << "Database:" << endl;

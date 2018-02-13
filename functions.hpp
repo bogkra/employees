@@ -1,6 +1,7 @@
 #ifndef functions_hpp
 #define functions_hpp
 #include "person.hpp"
+#include <fstream>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -18,5 +19,8 @@ findPersonsurname(string surname, vector<Person*>& m);
 
 void
 deletePerson(string peselNumberofErase, vector<Person*>& m);
+
+void
+save(vector<Person*>& m);
 
 #endif
