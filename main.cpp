@@ -4,17 +4,18 @@
 #include "student.hpp"
 #include <iostream>
 #include <vector>
+#include <memory>
 //<<<<<<< HEAD
 using namespace std;
 
 int
 main()
 {
-  std::vector<Person*> person;
-  Person* wsk =
-    new Employee("Siema", "Kowalski", "89000000", female, "Wrocław", 2310);
-  Person* wsk1 =
-    new Student("Wojtek", "Witkowik", "12345667", female, "Warszawa", 226);
+  std::vector<shared_ptr<Person>> person;
+  shared_ptr<Person> wsk =
+    make_shared<Employee>("Siema", "Kowalski", "89000000", female, "Wrocław", 2310);
+  shared_ptr<Person> wsk1 =
+    make_shared<Student>("Wojtek", "Witkowik", "12345667", female, "Warszawa", 226);
   person.push_back(wsk);
   person.push_back(wsk1);
   show(person);
@@ -23,7 +24,5 @@ main()
   findPersonpesel("89000000", person);
   findPersonsurname("Witkowik", person);
   save(person);
-  delete wsk;
-  delete wsk1;
   return 0;
 }

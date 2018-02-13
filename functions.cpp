@@ -1,7 +1,7 @@
 #include "functions.hpp"
 
 void
-save(vector<Person*>& m)
+save(vector<shared_ptr<Person>>& m)
 {
   fstream plik("plik.txt", ios::out);
   if (plik.good()) {
@@ -19,7 +19,7 @@ save(vector<Person*>& m)
 }
 
 void
-show(vector<Person*> m)
+show(vector<shared_ptr<Person>> m)
 {
   cout << "Database:" << endl;
   int i = 0;
@@ -33,7 +33,7 @@ show(vector<Person*> m)
 }
 
 void
-findPersonpesel(string peselNumber, vector<Person*>& m)
+findPersonpesel(string peselNumber, vector<shared_ptr<Person>>& m)
 {
   auto it2 = m.begin();
   int i = 0;
@@ -53,7 +53,7 @@ findPersonpesel(string peselNumber, vector<Person*>& m)
 }
 
 void
-findPersonsurname(string surname, vector<Person*>& m)
+findPersonsurname(string surname, vector<shared_ptr<Person>>& m)
 {
   auto it2 = m.begin();
   int i = 0;
@@ -73,7 +73,7 @@ findPersonsurname(string surname, vector<Person*>& m)
 }
 
 void
-deletePerson(string peselNumberofErase, vector<Person*>& m)
+deletePerson(string peselNumberofErase, vector<shared_ptr<Person>>& m)
 {
   auto it2 = m.begin();
   int i = 0;

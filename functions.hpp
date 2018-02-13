@@ -5,22 +5,23 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <memory>
 
 using namespace std;
 
 void
-show(vector<Person*> m);
+show(vector<shared_ptr<Person>> m);
 
 void
-findPersonpesel(string peselNumber, vector<Person*>& m);
+findPersonpesel(string peselNumber, vector<shared_ptr<Person>>& m);
 
 void
-findPersonsurname(string surname, vector<Person*>& m);
+findPersonsurname(string surname, vector<shared_ptr<Person>>& m);
 
 void
-deletePerson(string peselNumberofErase, vector<Person*>& m);
+deletePerson(string peselNumberofErase, vector<shared_ptr<Person>>& m);
 
 void
-save(vector<Person*>& m);
+save(vector<shared_ptr<Person>>& m);
 
 #endif
