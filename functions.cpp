@@ -46,31 +46,38 @@ save(vector<shared_ptr<Person>>& m)
   }
 }
 
+void 
+show(shared_ptr<Person> p)
+{
+    cout << p->occupation() << "  " << p->firstName << "  " << p->name
+         << "  " << p->pesel << "  " << ((p->sex)==male ? "male" : "female") << "  " << p->address
+         << "  " << p->number() << endl;
+}
+
+
+
+
 void
 show(vector<shared_ptr<Person>> m)
 {
   cout << "Database:" << endl;
   int i = 0;
-  for (auto it = m.begin(); it != m.end(); ++it) {
-    cout << m[i]->occupation() << "  " << m[i]->firstName << "  " << m[i]->name
-         << "  " << m[i]->pesel << "  " << m[i]->sex << "  " << m[i]->address
-         << "  " << m[i]->number() << endl;
+  for (auto it = m.begin(); it != m.end(); ++it){
+    show(m[i]);
     i++;
   }
   cout << endl;
 }
 
 void
-findPersonpesel(string peselNumber, vector<shared_ptr<Person>>& m)
+findPersonPesel(string peselNumber, vector<shared_ptr<Person>>& m)
 {
   auto it2 = m.begin();
   int i = 0;
   for (auto it = m.begin(); it != m.end(); it++) {
     if (peselNumber == m[i]->pesel) {
       cout << "Found Person:" << endl;
-      cout << m[i]->occupation() << "  " << m[i]->firstName << "  "
-           << m[i]->name << "  " << m[i]->pesel << "  " << m[i]->sex << "  "
-           << m[i]->address << "  " << m[i]->number() << endl;
+      show(m[i]);
       return;
     }
     if (peselNumber != m[i]->pesel) {
@@ -81,16 +88,14 @@ findPersonpesel(string peselNumber, vector<shared_ptr<Person>>& m)
 }
 
 void
-findPersonsurname(string surname, vector<shared_ptr<Person>>& m)
+findPersonSurname(string surname, vector<shared_ptr<Person>>& m)
 {
   auto it2 = m.begin();
   int i = 0;
   for (auto it = m.begin(); it != m.end(); it++) {
     if (surname == m[i]->name) {
       cout << "Found Person:" << endl;
-      cout << m[i]->occupation() << "  " << m[i]->firstName << "  "
-           << m[i]->name << "  " << m[i]->pesel << "  " << m[i]->sex << "  "
-           << m[i]->address << "  " << m[i]->number() << endl;
+      show(m[i]);
       return;
     }
     if (surname != m[i]->name) {
@@ -116,3 +121,5 @@ deletePerson(string peselNumberofErase, vector<shared_ptr<Person>>& m)
   }
   cout << "Lack of pesel!" << endl;
 }
+
+

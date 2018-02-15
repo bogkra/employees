@@ -18,15 +18,16 @@ void
 show(vector<shared_ptr<Person>> m);
 
 void
-findPersonpesel(string peselNumber, vector<shared_ptr<Person>>& m);
+findPersonPesel(string peselNumber, vector<shared_ptr<Person>>& m);
 
 void
-findPersonsurname(string surname, vector<shared_ptr<Person>>& m);
+findPersonSurname(string surname, vector<shared_ptr<Person>>& m);
 
 void
 deletePerson(string peselNumberofErase, vector<shared_ptr<Person>>& m);
 
 void
 save(vector<shared_ptr<Person>>& m);
+
 
 #endif
