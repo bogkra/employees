@@ -17,14 +17,14 @@ downloadDatabase(vector<shared_ptr<Person>>& m);
 void
 show(vector<shared_ptr<Person>> m);
 
-void
+bool
 findPersonPesel(string peselNumber, vector<shared_ptr<Person>>& m);
 
-void
+bool
 findPersonSurname(string surname, vector<shared_ptr<Person>>& m);
 
 void
-deletePerson(string peselNumberofErase, vector<shared_ptr<Person>>& m);
+deletePerson(string peselNumberOfErase, vector<shared_ptr<Person>>& m);
 
 void
 save(vector<shared_ptr<Person>>& m);

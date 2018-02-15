@@ -1,4 +1,5 @@
 #include "functions.hpp"
+#include <algorithm>
 
 void
 downloadDatabase(vector<shared_ptr<Person>>& m)
@@ -54,9 +55,6 @@ show(shared_ptr<Person> p)
          << "  " << p->number() << endl;
 }
 
-
-
-
 void
 show(vector<shared_ptr<Person>> m)
 {
@@ -69,57 +67,59 @@ show(vector<shared_ptr<Person>> m)
   cout << endl;
 }
 
-void
+bool 
+comparePesels(shared_ptr<Person> p, string pesel)
+{
+  return p->pesel == pesel;
+}
+
+bool
 findPersonPesel(string peselNumber, vector<shared_ptr<Person>>& m)
 {
-  auto it2 = m.begin();
-  int i = 0;
-  for (auto it = m.begin(); it != m.end(); it++) {
-    if (peselNumber == m[i]->pesel) {
-      cout << "Found Person:" << endl;
-      show(m[i]);
-      return;
-    }
-    if (peselNumber != m[i]->pesel) {
-      i++;
-    }
+  auto it = find_if(m.begin(), m.end(), bind(comparePesels, placeholders::_1, peselNumber));
+  if (it != m.end()) {
+    cout << "Found Person:" << endl;
+    show(*it);
+    return true;
   }
-  cout << "Lack of pesel!" << endl;
+  else {
+    cout << "Lack of PESEL!" << endl;
+    return false;
+  }
 }
 
-void
+bool 
+compareNames(shared_ptr<Person> p, string name)
+{
+  return p->name == name;
+}
+
+bool
 findPersonSurname(string surname, vector<shared_ptr<Person>>& m)
 {
-  auto it2 = m.begin();
-  int i = 0;
-  for (auto it = m.begin(); it != m.end(); it++) {
-    if (surname == m[i]->name) {
-      cout << "Found Person:" << endl;
-      show(m[i]);
-      return;
-    }
-    if (surname != m[i]->name) {
-      i++;
-    }
+  auto it = find_if(m.begin(), m.end(), bind(compareNames, placeholders::_1, surname));
+  if (it != m.end()) {
+    cout << "Found Person:" << endl;
+    show(*it);
+    return true; 
   }
-  cout << "Lack of surname!" << endl;
+  else {
+    cout << "Lack of surname!" << endl;
+    return false;
+  }
 }
 
 void
-deletePerson(string peselNumberofErase, vector<shared_ptr<Person>>& m)
+deletePerson(string peselNumberOfErase, vector<shared_ptr<Person>>& m)
 {
-  auto it2 = m.begin();
-  int i = 0;
-  for (auto it = m.begin(); it != m.end(); it++) {
-    if (peselNumberofErase == m[i]->pesel) {
-      m.erase(it2 + i);
-      return;
-    }
-    if (peselNumberofErase != m[i]->pesel) {
-      i++;
-    }
+  auto it = find_if(m.begin(), m.end(), bind(comparePesels, placeholders::_1, peselNumberOfErase));
+  if (it != m.end()) {
+    m.erase(it);
+    cout << "Person deleted" << endl;
   }
-  cout << "Lack of pesel!" << endl;
+  else {
+    cout << "Lack of PESEL!" << endl;
+  }
 }
 
 
