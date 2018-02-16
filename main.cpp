@@ -44,7 +44,12 @@ int main()
   sortPESEL(persons);
   cout << "_________________" << endl;
   show(persons);
-  return 0;
+  sortName(persons);
+  cout << "_________________" << endl;
+  show(persons);
+  sortPay(persons);
+  cout << "_________________" << endl;
+  show(persons);  return 0;
 }
 
 /*

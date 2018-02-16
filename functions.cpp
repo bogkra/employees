@@ -176,10 +176,16 @@ sortPESEL(vector<shared_ptr<Person>>& v)
 void
 sortName(vector<shared_ptr<Person>>& v) 
 {
+  sort(v.begin(), v.end(), [](shared_ptr<Person> p1, shared_ptr<Person> p2) {
+        return p1->name < p2->name;   
+    });
 }
 
 void
 sortPay(vector<shared_ptr<Person>>& v) 
 {
+//  sort(v.begin(), v.end(), [](shared_ptr<Person> p1, shared_ptr<Person> p2) {
+//        return p1->pay < p2->pay;   
+//    });
 }
 
