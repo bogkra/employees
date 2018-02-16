@@ -184,8 +184,8 @@ sortName(vector<shared_ptr<Person>>& v)
 void
 sortPay(vector<shared_ptr<Person>>& v) 
 {
-//  sort(v.begin(), v.end(), [](shared_ptr<Person> p1, shared_ptr<Person> p2) {
-//        return p1->pay < p2->pay;   
-//    });
+  sort(v.begin(), v.end(), [](shared_ptr<Person> p1, shared_ptr<Person> p2) {
+        return p1->number() < p2->number();   
+    });
 }
 

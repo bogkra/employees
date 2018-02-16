@@ -16,7 +16,7 @@ int main()
   shared_ptr<Person> wsk =
     make_shared<Employee>("Roch", "Kowalski", "88032304776", male, "Wrocław", 2310);
   shared_ptr<Person> wsk2 =
-    make_shared<Employee>("Siema", "Kowalski", "89000000", female, "Wrocław", 2310);
+    make_shared<Employee>("Siema", "Kowalski", "89000000", female, "Wrocław", 1234);
   shared_ptr<Person> wsk1 =
     make_shared<Student>("Wojtek", "Witkowik", "12345667", female, "Warszawa", 226);
   persons.push_back(wsk);
@@ -35,6 +35,10 @@ int main()
   downloadDatabase(persons);
   cout << "After download";
   show(persons);
+  sortPay(persons);
+  cout << "_________________" << endl;
+  show(persons); 
+
   fill(persons);
   cout << "................" << endl;
   show(persons);
@@ -47,9 +51,8 @@ int main()
   sortName(persons);
   cout << "_________________" << endl;
   show(persons);
-  sortPay(persons);
-  cout << "_________________" << endl;
-  show(persons);  return 0;
+ 
+  return 0;
 }
 
 /*
