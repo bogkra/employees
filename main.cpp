@@ -10,7 +10,8 @@ using namespace std;
 
 int main()
 {
-  cout << "hello!  ";
+  srand(time(0)); 
+
   std::vector<shared_ptr<Person>> persons;
   shared_ptr<Person> wsk =
     make_shared<Employee>("Roch", "Kowalski", "88032304776", male, "Wrocław", 2310);
