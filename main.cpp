@@ -34,5 +34,24 @@ int main()
   downloadDatabase(persons);
   cout << "After download";
   show(persons);
+  fill(persons);
+  cout << "................" << endl;
+  show(persons);
+  generate(persons);
+  cout << "_________________" << endl;
+  show(persons);
   return 0;
 }
+
+/*
+Wymagania: 
+1. Przechowywanie rekordów pracowników o strukturze: Imię, nazwisko, PESEL, płeć, adres, zarobki. Przechowywanie rekordów studentów o strukturze: Imię, nazwisko, PESEL, płeć, adres, nr indeksu. Wszystkie osoby niezależnie czy będą to pracownicy czy studenci mają być trzymani w jednej kolekcji. 
+2. Wyszukiwanie po nazwisku i numerze PESEL (std::find) 
+3. Wyświetlanie pełnej bazy danych 
+4. Sortowanie po zarobkach, PESELu, nazwisku (std::sort) 
+5. Wypełnianie bazy danych sztucznymi danymi (std::generate, std::fill) 
+6. Wczytywanie z pliku i zapisywanie całej bazy w pliku 
+7. Usuwanie po numerze PESEL (std::erase, std::remove) 
+8. Modyfikacja zarobków i adresu po numerze PESEL 
+9. Walidacja czy numer PESEL jest poprawny (std::isdigit) https://pl.wikipedia.org/wiki/PESEL#Cyfra_kontrolna_i_sprawdzanie_poprawno%C5%9Bci_numeru 
+*/

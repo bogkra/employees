@@ -115,11 +115,49 @@ deletePerson(string peselNumberOfErase, vector<shared_ptr<Person>>& m)
   auto it = find_if(m.begin(), m.end(), bind(comparePesels, placeholders::_1, peselNumberOfErase));
   if (it != m.end()) {
     m.erase(it);
-    cout << "Person deleted" << endl;
+    cout << "A person deleted" << endl;
   }
   else {
     cout << "Lack of PESEL!" << endl;
   }
+}
+
+
+//5. Wypełnianie bazy danych sztucznymi danymi (std::generate, std::fill) 
+string randomString(int len)
+{
+   srand(time(0));
+   string str = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+   string newstr;
+   int pos;
+   while(newstr.size() != len) {
+     pos = ((rand() % (str.size() - 1)));
+     newstr += str.substr(pos,1);
+   }
+   return newstr;
+}
+
+Sex 
+randomSex()
+{
+ return (((rand() % 2) == 0) ? male : female);
+}
+ 
+
+void
+generate(vector<shared_ptr<Person>>& v)
+{
+//   srand(time(0));
+//   generate(v.begin(), v.end(), make_shared<Employee>(randomString(5), "Kowalski", "88032304776", male, "Wrocław", 2310));
+  generate(v.begin(), v.end(), [] () {    srand(time(0)); return make_shared<Employee>(randomString(5), randomString(9), randomString(11), randomSex(), randomString(5), rand()); } );
+
+}
+
+void
+fill(vector<shared_ptr<Person>>& v)
+{
+   srand(time(0));
+   fill(v.begin(), v.end(), make_shared<Employee>(randomString(5), randomString(9), randomString(11), randomSex(), randomString(5), rand()));
 }
 
 

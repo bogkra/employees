@@ -29,5 +29,11 @@ deletePerson(string peselNumberOfErase, vector<shared_ptr<Person>>& m);
 void
 save(vector<shared_ptr<Person>>& m);
 
+//5. Wypełnianie bazy danych sztucznymi danymi (std::generate, std::fill) 
+void 
+generate(vector<shared_ptr<Person>>& m);
+
+void
+fill(vector<shared_ptr<Person>>& v);
 
 #endif
