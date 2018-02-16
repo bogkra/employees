@@ -1,4 +1,5 @@
 #include "functions.hpp"
+#include "person.hpp"
 #include <algorithm>
 
 void
@@ -16,18 +17,19 @@ downloadDatabase(vector<shared_ptr<Person>>& m)
            number) {
       if (occupation == "Student") {
         shared_ptr<Person> wsk =
-          make_shared<Student>(firstname, name, pesel, female, address, number);
+          make_shared<Student>(firstname, name, pesel, Sex(sex), address, number);
         m.push_back(wsk);
       }
       if (occupation == "Employee") {
         shared_ptr<Person> wsk = make_shared<Employee>(
-          firstname, name, pesel, female, address, number);
+          firstname, name, pesel, Sex(sex), address, number);
         m.push_back(wsk);
       }
     }
     plik.close();
   }
 }
+
 
 void
 save(vector<shared_ptr<Person>>& m)
@@ -153,7 +155,6 @@ generate(vector<shared_ptr<Person>>& v)
   //        else
     //        return make_shared<Student>(randomString(5), randomString(9), randomString(11), randomSex(), randomString(5), rand()); 
          } );
-
 }
 
 void
@@ -184,8 +185,14 @@ sortName(vector<shared_ptr<Person>>& v)
 void
 sortPay(vector<shared_ptr<Person>>& v) 
 {
+
   sort(v.begin(), v.end(), [](shared_ptr<Person> p1, shared_ptr<Person> p2) {
-        return p1->number() < p2->number();   
+ 	if (p1->occupation() == "Student")
+          return false;
+        else if (p2->occupation() == "Student")
+          return true;
+        else
+          return (p1->number() < p2->number());   
     });
 }
 

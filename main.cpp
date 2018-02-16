@@ -5,7 +5,6 @@
 #include <iostream>
 #include <vector>
 #include <memory>
-//<<<<<<< HEAD
 using namespace std;
 
 int main()
@@ -18,7 +17,7 @@ int main()
   shared_ptr<Person> wsk2 =
     make_shared<Employee>("Siema", "Kowalski", "89000000", female, "Wrocław", 1234);
   shared_ptr<Person> wsk1 =
-    make_shared<Student>("Wojtek", "Witkowik", "12345667", female, "Warszawa", 226);
+    make_shared<Student>("Wojtek", "Witkowik", "12345667", female, "Warszawa", 1996);
   persons.push_back(wsk);
   persons.push_back(wsk2);
   persons.push_back(wsk1);
@@ -33,18 +32,19 @@ int main()
 //  show(person[0]);
   save(persons);
   downloadDatabase(persons);
-  cout << "After download";
+  cout << "After download  "<< endl;
   show(persons);
   sortPay(persons);
   cout << "_________________" << endl;
   show(persons); 
-
+/*
   fill(persons);
   cout << "................" << endl;
   show(persons);
   generate(persons);
   cout << "_________________" << endl;
   show(persons);
+*/
   sortPESEL(persons);
   cout << "_________________" << endl;
   show(persons);
