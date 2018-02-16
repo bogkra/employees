@@ -41,6 +41,9 @@ int main()
   generate(persons);
   cout << "_________________" << endl;
   show(persons);
+  sortPESEL(persons);
+  cout << "_________________" << endl;
+  show(persons);
   return 0;
 }
 

@@ -147,7 +147,12 @@ randomSex()
 void
 generate(vector<shared_ptr<Person>>& v)
 {
-  generate(v.begin(), v.end(), [] () {    return make_shared<Employee>(randomString(5), randomString(9), randomString(11), randomSex(), randomString(5), rand()); } );
+   generate(v.begin(), v.end(), [] () { 
+//          if ((rand() % 2) == 0)  
+            return make_shared<Employee>(randomString(5), randomString(9), randomString(11), randomSex(), randomString(5), rand()); 
+  //        else
+    //        return make_shared<Student>(randomString(5), randomString(9), randomString(11), randomSex(), randomString(5), rand()); 
+         } );
 
 }
 
@@ -160,4 +165,21 @@ fill(vector<shared_ptr<Person>>& v)
      fill(v.begin(), v.end(), make_shared<Student>(randomString(5), randomString(9), randomString(11), randomSex(), randomString(5), rand()));
 }
 
+void
+sortPESEL(vector<shared_ptr<Person>>& v) 
+{
+  sort(v.begin(), v.end(), [](shared_ptr<Person> p1, shared_ptr<Person> p2) {
+        return p1->pesel < p2->pesel;   
+    });
+}
+
+void
+sortName(vector<shared_ptr<Person>>& v) 
+{
+}
+
+void
+sortPay(vector<shared_ptr<Person>>& v) 
+{
+}
 

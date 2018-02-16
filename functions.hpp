@@ -36,4 +36,13 @@ generate(vector<shared_ptr<Person>>& m);
 void
 fill(vector<shared_ptr<Person>>& v);
 
+void
+sortPESEL(vector<shared_ptr<Person>>& v);
+
+void
+sortName(vector<shared_ptr<Person>>& v);
+
+void
+sortPay(vector<shared_ptr<Person>>& v);
+
 #endif
