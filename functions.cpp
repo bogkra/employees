@@ -6,15 +6,11 @@ void
 downloadDatabase(vector<shared_ptr<Person>>& m)
 {
   string occupation, firstname, name, pesel, address;
-  int sex;
-  int number;
+  int sex, number;
   ifstream plik;
-  string wiersz;
-  int nr_wiersza = 0;
   plik.open("plik.txt");
   if (plik.good()) {
-    while (plik >> occupation >> firstname >> name >> pesel >> sex >> address >>
-           number) {
+    while (plik >> occupation >> firstname >> name >> pesel >> sex >> address >> number) {
       if (occupation == "Student") {
         shared_ptr<Person> wsk =
           make_shared<Student>(firstname, name, pesel, Sex(sex), address, number);
@@ -36,13 +32,10 @@ save(vector<shared_ptr<Person>>& m)
 {
   fstream plik("plik.txt", ios::out);
   if (plik.good()) {
-    // plik << "Database:" << endl;
-    int i = 0;
     for (auto it = m.begin(); it != m.end(); ++it) {
-      plik << m[i]->occupation() << "  " << m[i]->firstName << "  "
-           << m[i]->name << "  " << m[i]->pesel << "  " << m[i]->sex << "  "
-           << m[i]->address << "  " << m[i]->number() << endl;
-      i++;
+      plik << (*it)->occupation() << "  " << (*it)->firstName << "  "
+           << (*it)->name << "  " << (*it)->pesel << "  " << (*it)->sex << "  "
+           << (*it)->address << "  " << (*it)->number() << endl;
       plik.flush();
     }
     plik.close();
@@ -61,10 +54,8 @@ void
 show(vector<shared_ptr<Person>> m)
 {
   cout << "Database:" << endl;
-  int i = 0;
   for (auto it = m.begin(); it != m.end(); ++it){
-    show(m[i]);
-    i++;
+    show(*it);
   }
   cout << endl;
 }
@@ -142,7 +133,7 @@ randomString(int len)
 Sex 
 randomSex()
 {
- return (((rand() % 2) == 0) ? male : female);
+  return (((rand() % 2) == 0) ? male : female);
 }
  
 
@@ -185,7 +176,6 @@ sortName(vector<shared_ptr<Person>>& v)
 void
 sortPay(vector<shared_ptr<Person>>& v) 
 {
-
   sort(v.begin(), v.end(), [](shared_ptr<Person> p1, shared_ptr<Person> p2) {
  	if (p1->occupation() == "Student")
           return false;
@@ -195,4 +185,18 @@ sortPay(vector<shared_ptr<Person>>& v)
           return (p1->number() < p2->number());   
     });
 }
+
+//8. Modyfikacja zarobków i adresu po numerze PESEL 
+void
+modify(string pesel, int pay_, string address, vector<shared_ptr<Person>>& m)
+{
+  auto it = find_if(m.begin(), m.end(), bind(comparePesels, placeholders::_1, pesel));
+  if (it != m.end()) {
+   // ((shared_ptr<Employee>)(it))->pay = pay_;
+//    (*it)->number() = pay_;
+    (*it)->address = address;
+    cout << "A person modified" << endl;
+  }
+}
+
 

@@ -21,6 +21,7 @@ int main()
   persons.push_back(wsk);
   persons.push_back(wsk2);
   persons.push_back(wsk1);
+  modify("89000000", 12543, "Głuchołazy", persons);
   show(persons);
   deletePerson("123456", persons);
   show(persons);

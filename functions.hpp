@@ -45,4 +45,7 @@ sortName(vector<shared_ptr<Person>>& v);
 void
 sortPay(vector<shared_ptr<Person>>& v);
 
+void
+modify(string pesel, int pay_, string address, vector<shared_ptr<Person>>& m);
+
 #endif
