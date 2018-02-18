@@ -192,9 +192,28 @@ modify(string pesel, int pay_, string address, vector<shared_ptr<Person>>& m)
 {
   auto it = find_if(m.begin(), m.end(), bind(comparePesels, placeholders::_1, pesel));
   if (it != m.end()) {
+    string firstName = (*it)->firstName;
+    string name = (*it)->name;
+    Sex sex = (*it)->sex;
+    m.erase(it);
+    
+    shared_ptr<Person> wsk = make_shared<Employee>(firstName, name, pesel, sex, address, pay_);
+    m.push_back(wsk);
+
+  //  string name, string pesel, Sex sex, string address, int pay) 
+   // transform(it, it, it,    [] (string firstName, string name, string pesel, Sex sex, string address, int pay) 
+     //  {return shared_ptr<Employee>("Roch", "Kowalski", "88032304776", male, "Wrocław", 2310);}
+//     );
    // ((shared_ptr<Employee>)(it))->pay = pay_;
+//    shared_ptr<Employee> e;
+//    e = 
+//static_cast<shared_ptr<Employee*> >(**it);
+//dynamic_cast<Employee*>(*it);
+
+	//    Person *p = new Person();
+//	    Employee* e = dynamic_cast<Employee*>(*it);
 //    (*it)->number() = pay_;
-    (*it)->address = address;
+//    (*it)->address = address;
     cout << "A person modified" << endl;
   }
 }
