@@ -19,7 +19,6 @@ public:
   void downloadDatabase(const string fileName);
   void save(const string fileName);
   void show();
-//  vector<shared_ptr<Person>>::iterator    findPersonPesel(string peselNumber);
   shared_ptr<Person> findPersonPesel(string peselNumber);
   shared_ptr<Person> findPersonSurname(string surname);
   void deletePerson(string peselNumberOfErase);

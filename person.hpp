@@ -24,6 +24,11 @@ public:
   bool validatePESEL();
   void show();
 
+protected:
+//  string firstName;
+//  string name;
+
+
 };
 
 #endif

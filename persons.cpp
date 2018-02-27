@@ -26,7 +26,6 @@ Persons::downloadDatabase(const string fileName)
   }
 }
 
-
 void
 Persons::save(const string fileName)
 {
@@ -42,7 +41,6 @@ Persons::save(const string fileName)
   }
 }
 
-
 void
 Persons::show()
 {
@@ -53,16 +51,10 @@ Persons::show()
   cout << endl;
 }
 
-bool 
-comparePesels(shared_ptr<Person> p, string pesel)
-{
-  return p->pesel == pesel;
-}
-
 shared_ptr<Person>
 Persons::findPersonPesel(string peselNumber)
 {
-  auto it = find_if(m.begin(), m.end(), bind(comparePesels, placeholders::_1, peselNumber));
+  auto it = find_if(m.begin(), m.end(), [peselNumber] (const shared_ptr<Person> p) { return p->pesel == peselNumber;});
   if (it != m.end()) {
     cout << "Found Person:" << endl;
     (*it)->show();
@@ -72,16 +64,10 @@ Persons::findPersonPesel(string peselNumber)
   return *it;
 }
 
-bool 
-compareNames(shared_ptr<Person> p, string name)
-{
-  return p->name == name;
-}
-
 shared_ptr<Person>
 Persons::findPersonSurname(string surname)
 {
-  auto it = find_if(m.begin(), m.end(), bind(compareNames, placeholders::_1, surname));
+  auto it = find_if(m.begin(), m.end(), [surname] (const shared_ptr<Person> p) { return p->name == surname;});
   if (it != m.end()) {
     cout << "Found Person:" << endl;
     (*it)->show();
@@ -94,7 +80,7 @@ Persons::findPersonSurname(string surname)
 void
 Persons::deletePerson(string peselNumberOfErase)
 {
-  auto it = find_if(m.begin(), m.end(), bind(comparePesels, placeholders::_1, peselNumberOfErase));
+  auto it = find_if(m.begin(), m.end(), [peselNumberOfErase] (const shared_ptr<Person> p) { return p->pesel == peselNumberOfErase;});
   if (it != m.end()) {
     m.erase(it);
     cout << "A person deleted" << endl;
@@ -175,7 +161,7 @@ Persons::sortPay()
 void
 Persons::modify(string pesel, int pay_, string address)
 {
-  auto it = find_if(m.begin(), m.end(), bind(comparePesels, placeholders::_1, pesel));
+  auto it = find_if(m.begin(), m.end(), [pesel] (const shared_ptr<Person> p) { return p->pesel == pesel;});
   if (it != m.end()) {
     string firstName = (*it)->firstName;
     string name = (*it)->name;

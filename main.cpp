@@ -31,8 +31,8 @@ int main()
   persons.findPersonSurname("Witkowik");
   persons.findPersonSurname("Sitkowik");
 
-  cout <<endl << "PESEL " << (persons.m[0]->validatePESEL() ? "OK" : "KO") ;
-  cout << " for: " << persons.m[0]->firstName << " " << persons.m[0]->name <<endl;
+  cout <<endl << "PESEL " << (persons.m[0]->validatePESEL() ? "OK" : "KO") << " for: ";
+  persons.m[0]->show();
 
   persons.save(file);
   persons.downloadDatabase(file);
