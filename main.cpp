@@ -10,6 +10,7 @@ using namespace std;
 int main()
 {
   srand(time(0)); 
+  const string file = "plik.txt";  
 
   Persons persons;
   shared_ptr<Person> wsk =
@@ -33,8 +34,8 @@ int main()
   cout <<endl << "PESEL " << (persons.m[0]->validatePESEL() ? "OK" : "KO") ;
   cout << " for: " << persons.m[0]->firstName << " " << persons.m[0]->name <<endl;
 
-  persons.save();
-  persons.downloadDatabase();
+  persons.save(file);
+  persons.downloadDatabase(file);
   cout << "After download  "<< endl;
   persons.show();
   persons.sortPay();

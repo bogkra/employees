@@ -16,8 +16,8 @@ class Persons
 public:
   vector<shared_ptr<Person>> m;
 
-  void downloadDatabase();
-  void save();
+  void downloadDatabase(const string fileName);
+  void save(const string fileName);
   void show();
   bool findPersonPesel(string peselNumber);
   bool findPersonSurname(string surname);

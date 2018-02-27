@@ -3,34 +3,34 @@
 #include <algorithm>
 
 void
-Persons::downloadDatabase()
+Persons::downloadDatabase(const string fileName)
 {
-  string occupation, firstname, name, pesel, address;
+  string occupation, firstName, name, pesel, address;
   int sex, number;
-  ifstream plik;
-  plik.open("plik.txt");
-  if (plik.good()) {
-    while (plik >> occupation >> firstname >> name >> pesel >> sex >> address >> number) {
+  ifstream file;
+  file.open(fileName);
+  if (file.good()) {
+    while (file >> occupation >> firstName >> name >> pesel >> sex >> address >> number) {
       if (occupation == "Student") {
         shared_ptr<Person> wsk =
-          make_shared<Student>(firstname, name, pesel, Sex(sex), address, number);
+          make_shared<Student>(firstName, name, pesel, Sex(sex), address, number);
         m.push_back(wsk);
       }
       if (occupation == "Employee") {
         shared_ptr<Person> wsk = make_shared<Employee>(
-          firstname, name, pesel, Sex(sex), address, number);
+          firstName, name, pesel, Sex(sex), address, number);
         m.push_back(wsk);
       }
     }
-    plik.close();
+    file.close();
   }
 }
 
 
 void
-Persons::save()
+Persons::save(const string fileName)
 {
-  fstream plik("plik.txt", ios::out);
+  fstream plik(fileName, ios::out);
   if (plik.good()) {
     for (auto it = m.begin(); it != m.end(); ++it) {
       plik << (*it)->occupation() << "  " << (*it)->firstName << "  "
