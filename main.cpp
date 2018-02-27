@@ -1,6 +1,6 @@
 #include "employee.hpp"
-#include "functions.hpp"
 #include "person.hpp"
+#include "persons.hpp"
 #include "student.hpp"
 #include <iostream>
 #include <vector>
@@ -11,47 +11,41 @@ int main()
 {
   srand(time(0)); 
 
-  std::vector<shared_ptr<Person>> persons;
+  Persons persons;
   shared_ptr<Person> wsk =
     make_shared<Employee>("Roch", "Kowalski", "88032304776", male, "Wrocław", 2310);
   shared_ptr<Person> wsk2 =
     make_shared<Employee>("Siema", "Kowalski", "89000000", female, "Wrocław", 1234);
   shared_ptr<Person> wsk1 =
     make_shared<Student>("Wojtek", "Witkowik", "12345667", female, "Warszawa", 1996);
-  persons.push_back(wsk);
-  persons.push_back(wsk2);
-  persons.push_back(wsk1);
-  modify("89000000", 12543, "Głuchołazy", persons);
-  show(persons);
-  deletePerson("123456", persons);
-  show(persons);
-  findPersonPesel("89000000", persons);
-  findPersonPesel("89040000", persons);
-  findPersonSurname("Witkowik", persons);
-  findPersonSurname("Sitkowik", persons);
-  cout <<endl << "PESEL " << (persons[0]->validatePESEL() ? "OK" : "KO") << " for: " << persons[0]->firstName << " " << persons[0]->name <<endl;
-//  show(person[0]);
-  save(persons);
-  downloadDatabase(persons);
+  persons.m.push_back(wsk);
+  persons.m.push_back(wsk2);
+  persons.m.push_back(wsk1);
+  persons.modify("89000000", 12543, "Głuchołazy");
+  persons.show();
+  persons.deletePerson("123456");
+  persons.show();
+  persons.findPersonPesel("89000000");
+  persons.findPersonPesel("89040000");
+  persons.findPersonSurname("Witkowik");
+  persons.findPersonSurname("Sitkowik");
+
+  cout <<endl << "PESEL " << (persons.m[0]->validatePESEL() ? "OK" : "KO") ;
+  cout << " for: " << persons.m[0]->firstName << " " << persons.m[0]->name <<endl;
+
+  persons.save();
+  persons.downloadDatabase();
   cout << "After download  "<< endl;
-  show(persons);
-  sortPay(persons);
+  persons.show();
+  persons.sortPay();
   cout << "_________________" << endl;
-  show(persons); 
-/*
-  fill(persons);
-  cout << "................" << endl;
-  show(persons);
-  generate(persons);
+  persons.show(); 
+  persons.sortPESEL();
   cout << "_________________" << endl;
-  show(persons);
-*/
-  sortPESEL(persons);
+  persons.show();
+  persons.sortName();
   cout << "_________________" << endl;
-  show(persons);
-  sortName(persons);
-  cout << "_________________" << endl;
-  show(persons);
+  persons.show();
  
   return 0;
 }

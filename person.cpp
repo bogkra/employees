@@ -1,3 +1,4 @@
+#include <iostream>
 #include "person.hpp"
 using namespace std;
 
@@ -32,4 +33,11 @@ Person::validatePESEL()
 
   // warning: possible more precise validations - day of month, month, date in
   // the future...
+}
+
+void 
+Person::show()
+{
+    cout << occupation() << "  " << firstName << "  " << name  << "  " << pesel << "  " << ((sex)==male ? "male" : "female") << "  " << address
+         << "  " << number() << endl;
 }

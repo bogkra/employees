@@ -1,9 +1,9 @@
-#include "functions.hpp"
 #include "person.hpp"
+#include "persons.hpp"
 #include <algorithm>
 
 void
-downloadDatabase(vector<shared_ptr<Person>>& m)
+Persons::downloadDatabase()
 {
   string occupation, firstname, name, pesel, address;
   int sex, number;
@@ -28,7 +28,7 @@ downloadDatabase(vector<shared_ptr<Person>>& m)
 
 
 void
-save(vector<shared_ptr<Person>>& m)
+Persons::save()
 {
   fstream plik("plik.txt", ios::out);
   if (plik.good()) {
@@ -42,20 +42,13 @@ save(vector<shared_ptr<Person>>& m)
   }
 }
 
-void 
-show(shared_ptr<Person> p)
-{
-    cout << p->occupation() << "  " << p->firstName << "  " << p->name
-         << "  " << p->pesel << "  " << ((p->sex)==male ? "male" : "female") << "  " << p->address
-         << "  " << p->number() << endl;
-}
 
 void
-show(vector<shared_ptr<Person>> m)
+Persons::show()
 {
   cout << "Database:" << endl;
   for (auto it = m.begin(); it != m.end(); ++it){
-    show(*it);
+    (*it)->show();
   }
   cout << endl;
 }
@@ -67,12 +60,12 @@ comparePesels(shared_ptr<Person> p, string pesel)
 }
 
 bool
-findPersonPesel(string peselNumber, vector<shared_ptr<Person>>& m)
+Persons::findPersonPesel(string peselNumber)
 {
   auto it = find_if(m.begin(), m.end(), bind(comparePesels, placeholders::_1, peselNumber));
   if (it != m.end()) {
     cout << "Found Person:" << endl;
-    show(*it);
+    (*it)->show();
     return true;
   }
   else {
@@ -88,12 +81,12 @@ compareNames(shared_ptr<Person> p, string name)
 }
 
 bool
-findPersonSurname(string surname, vector<shared_ptr<Person>>& m)
+Persons::findPersonSurname(string surname)
 {
   auto it = find_if(m.begin(), m.end(), bind(compareNames, placeholders::_1, surname));
   if (it != m.end()) {
     cout << "Found Person:" << endl;
-    show(*it);
+    (*it)->show();
     return true; 
   }
   else {
@@ -103,7 +96,7 @@ findPersonSurname(string surname, vector<shared_ptr<Person>>& m)
 }
 
 void
-deletePerson(string peselNumberOfErase, vector<shared_ptr<Person>>& m)
+Persons::deletePerson(string peselNumberOfErase)
 {
   auto it = find_if(m.begin(), m.end(), bind(comparePesels, placeholders::_1, peselNumberOfErase));
   if (it != m.end()) {
@@ -138,45 +131,42 @@ randomSex()
  
 
 void
-generate(vector<shared_ptr<Person>>& v)
+Persons::generate()
 {
-   generate(v.begin(), v.end(), [] () { 
-//          if ((rand() % 2) == 0)  
+   std::generate(m.begin(), m.end(), [] () { 
             return make_shared<Employee>(randomString(5), randomString(9), randomString(11), randomSex(), randomString(5), rand()); 
-  //        else
-    //        return make_shared<Student>(randomString(5), randomString(9), randomString(11), randomSex(), randomString(5), rand()); 
          } );
 }
 
 void
-fill(vector<shared_ptr<Person>>& v)
+Persons::fill()
 {
    if ((rand() % 2) == 0)  
-     fill(v.begin(), v.end(), make_shared<Employee>(randomString(5), randomString(9), randomString(11), randomSex(), randomString(5), rand()));
+     std::fill(m.begin(), m.end(), make_shared<Employee>(randomString(5), randomString(9), randomString(11), randomSex(), randomString(5), rand()));
    else
-     fill(v.begin(), v.end(), make_shared<Student>(randomString(5), randomString(9), randomString(11), randomSex(), randomString(5), rand()));
+     std::fill(m.begin(), m.end(), make_shared<Student>(randomString(5), randomString(9), randomString(11), randomSex(), randomString(5), rand()));
 }
 
 void
-sortPESEL(vector<shared_ptr<Person>>& v) 
+Persons::sortPESEL() 
 {
-  sort(v.begin(), v.end(), [](shared_ptr<Person> p1, shared_ptr<Person> p2) {
+  sort(m.begin(), m.end(), [](shared_ptr<Person> p1, shared_ptr<Person> p2) {
         return p1->pesel < p2->pesel;   
     });
 }
 
 void
-sortName(vector<shared_ptr<Person>>& v) 
+Persons::sortName() 
 {
-  sort(v.begin(), v.end(), [](shared_ptr<Person> p1, shared_ptr<Person> p2) {
+  sort(m.begin(), m.end(), [](shared_ptr<Person> p1, shared_ptr<Person> p2) {
         return p1->name < p2->name;   
     });
 }
 
 void
-sortPay(vector<shared_ptr<Person>>& v) 
+Persons::sortPay() 
 {
-  sort(v.begin(), v.end(), [](shared_ptr<Person> p1, shared_ptr<Person> p2) {
+  sort(m.begin(), m.end(), [](shared_ptr<Person> p1, shared_ptr<Person> p2) {
  	if (p1->occupation() == "Student")
           return false;
         else if (p2->occupation() == "Student")
@@ -188,7 +178,7 @@ sortPay(vector<shared_ptr<Person>>& v)
 
 //8. Modyfikacja zarobków i adresu po numerze PESEL 
 void
-modify(string pesel, int pay_, string address, vector<shared_ptr<Person>>& m)
+Persons::modify(string pesel, int pay_, string address)
 {
   auto it = find_if(m.begin(), m.end(), bind(comparePesels, placeholders::_1, pesel));
   if (it != m.end()) {
@@ -200,20 +190,6 @@ modify(string pesel, int pay_, string address, vector<shared_ptr<Person>>& m)
     shared_ptr<Person> wsk = make_shared<Employee>(firstName, name, pesel, sex, address, pay_);
     m.push_back(wsk);
 
-  //  string name, string pesel, Sex sex, string address, int pay) 
-   // transform(it, it, it,    [] (string firstName, string name, string pesel, Sex sex, string address, int pay) 
-     //  {return shared_ptr<Employee>("Roch", "Kowalski", "88032304776", male, "Wrocław", 2310);}
-//     );
-   // ((shared_ptr<Employee>)(it))->pay = pay_;
-//    shared_ptr<Employee> e;
-//    e = 
-//static_cast<shared_ptr<Employee*> >(**it);
-//dynamic_cast<Employee*>(*it);
-
-	//    Person *p = new Person();
-//	    Employee* e = dynamic_cast<Employee*>(*it);
-//    (*it)->number() = pay_;
-//    (*it)->address = address;
     cout << "A person modified" << endl;
   }
 }

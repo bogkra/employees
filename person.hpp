@@ -22,6 +22,8 @@ public:
   virtual string occupation() = 0;
   virtual int number() = 0;
   bool validatePESEL();
+  void show();
+
 };
 
 #endif
