@@ -12,14 +12,14 @@ Persons::downloadDatabase(const string fileName)
   if (file.good()) {
     while (file >> occupation >> firstName >> name >> pesel >> sex >> address >> number) {
       if (occupation == "Student") {
-        shared_ptr<Person> wsk =
+        shared_ptr<Person> ptr =
           make_shared<Student>(firstName, name, pesel, Sex(sex), address, number);
-        m.push_back(wsk);
+        m.push_back(ptr);
       }
       if (occupation == "Employee") {
-        shared_ptr<Person> wsk = make_shared<Employee>(
+        shared_ptr<Person> ptr = make_shared<Employee>(
           firstName, name, pesel, Sex(sex), address, number);
-        m.push_back(wsk);
+        m.push_back(ptr);
       }
     }
     file.close();
@@ -30,15 +30,15 @@ Persons::downloadDatabase(const string fileName)
 void
 Persons::save(const string fileName)
 {
-  fstream plik(fileName, ios::out);
-  if (plik.good()) {
+  fstream file(fileName, ios::out);
+  if (file.good()) {
     for (auto it = m.begin(); it != m.end(); ++it) {
-      plik << (*it)->occupation() << "  " << (*it)->firstName << "  "
+      file << (*it)->occupation() << "  " << (*it)->firstName << "  "
            << (*it)->name << "  " << (*it)->pesel << "  " << (*it)->sex << "  "
            << (*it)->address << "  " << (*it)->number() << endl;
-      plik.flush();
+      file.flush();
     }
-    plik.close();
+    file.close();
   }
 }
 
@@ -59,19 +59,17 @@ comparePesels(shared_ptr<Person> p, string pesel)
   return p->pesel == pesel;
 }
 
-bool
+shared_ptr<Person>
 Persons::findPersonPesel(string peselNumber)
 {
   auto it = find_if(m.begin(), m.end(), bind(comparePesels, placeholders::_1, peselNumber));
   if (it != m.end()) {
     cout << "Found Person:" << endl;
     (*it)->show();
-    return true;
   }
-  else {
-    cout << "Lack of PESEL!" << endl;
-    return false;
-  }
+  else 
+    cout << "PESEL not found!" << endl;
+  return *it;
 }
 
 bool 
@@ -80,19 +78,17 @@ compareNames(shared_ptr<Person> p, string name)
   return p->name == name;
 }
 
-bool
+shared_ptr<Person>
 Persons::findPersonSurname(string surname)
 {
   auto it = find_if(m.begin(), m.end(), bind(compareNames, placeholders::_1, surname));
   if (it != m.end()) {
     cout << "Found Person:" << endl;
     (*it)->show();
-    return true; 
   }
-  else {
-    cout << "Lack of surname!" << endl;
-    return false;
-  }
+  else 
+    cout << "Surname not found!" << endl;
+  return *it;
 }
 
 void
@@ -103,9 +99,8 @@ Persons::deletePerson(string peselNumberOfErase)
     m.erase(it);
     cout << "A person deleted" << endl;
   }
-  else {
-    cout << "Lack of PESEL!" << endl;
-  }
+  else 
+    cout << "PESEL not found!" << endl;
 }
 
 
@@ -135,7 +130,7 @@ Persons::generate()
 {
    std::generate(m.begin(), m.end(), [] () { 
             return make_shared<Employee>(randomString(5), randomString(9), randomString(11), randomSex(), randomString(5), rand()); 
-         } );
+   } );
 }
 
 void
@@ -152,7 +147,7 @@ Persons::sortPESEL()
 {
   sort(m.begin(), m.end(), [](shared_ptr<Person> p1, shared_ptr<Person> p2) {
         return p1->pesel < p2->pesel;   
-    });
+  });
 }
 
 void
@@ -160,7 +155,7 @@ Persons::sortName()
 {
   sort(m.begin(), m.end(), [](shared_ptr<Person> p1, shared_ptr<Person> p2) {
         return p1->name < p2->name;   
-    });
+  });
 }
 
 void
@@ -173,7 +168,7 @@ Persons::sortPay()
           return true;
         else
           return (p1->number() < p2->number());   
-    });
+  });
 }
 
 //8. Modyfikacja zarobków i adresu po numerze PESEL 
@@ -187,8 +182,8 @@ Persons::modify(string pesel, int pay_, string address)
     Sex sex = (*it)->sex;
     m.erase(it);
     
-    shared_ptr<Person> wsk = make_shared<Employee>(firstName, name, pesel, sex, address, pay_);
-    m.push_back(wsk);
+    shared_ptr<Person> ptr = make_shared<Employee>(firstName, name, pesel, sex, address, pay_);
+    m.push_back(ptr);
 
     cout << "A person modified" << endl;
   }
