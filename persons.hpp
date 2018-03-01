@@ -11,16 +11,17 @@
 
 using namespace std;
 
+
 class Persons
 {
 public:
-  vector<shared_ptr<Person>> m;
+  vector<pp> m;
 
   void downloadDatabase(const string fileName);
   void save(const string fileName);
   void show();
-  shared_ptr<Person> findPersonPesel(string peselNumber);
-  shared_ptr<Person> findPersonSurname(string surname);
+  pp findPersonPesel(string peselNumber);
+  pp findPersonSurname(string surname);
   void deletePerson(string peselNumberOfErase);
   void generate();
   void fill();

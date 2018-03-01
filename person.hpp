@@ -1,6 +1,7 @@
 #ifndef person_hpp
 #define person_hpp
 #include <string>
+#include <memory>
 
 using namespace std;
 
@@ -25,10 +26,11 @@ public:
   void show();
 
 protected:
-//  string firstName;
-//  string name;
 
 
 };
+
+typedef shared_ptr<Person> pp;
+
 
 #endif
