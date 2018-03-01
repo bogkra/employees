@@ -30,26 +30,23 @@ void
 Persons::save(const string fileName)
 {
   fstream file(fileName, ios::out);
+
   if (file.good()) {
-    for (auto it = m.begin(); it != m.end(); ++it) {
-      file << (*it)->occupation() << "  " << (*it)->firstName << "  "
-           << (*it)->name << "  " << (*it)->pesel << "  " << (*it)->sex << "  "
-           << (*it)->address << "  " << (*it)->number() << endl;
- //   for_each (m.begin(), m.end(), [](pp p) {
-//      file << p->occupation() << "  " << p->firstName << "  "  << p->name  << "  " 
-//           << p->pesel << "  " << p->sex << "  " << p->address << "  " << p->number() << endl;
-//      file.flush();
-//    });
+    for (auto p : m) {
+      file << p->occupation() << "  " << p->firstName << "  "  << p->name  << "  " 
+           << p->pesel << "  " << p->sex << "  " << p->address << "  " << p->number() << endl;
+      file.flush();
     };
     file.close();
-  }
+  };
 }
 
 void
 Persons::show()
 {
   cout << "Database:" << endl;
-  for_each(m.begin(),  m.end(), [](pp p){p->show();});
+  for (auto p : m) 
+    p->show();
   cout << endl;
 }
 
@@ -96,7 +93,7 @@ Persons::deletePerson(string peselNumberOfErase)
 string 
 randomString(int len)
 {
-   string str = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+   string str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
    string newstr;
    int pos;
    while(newstr.size() != len) {
