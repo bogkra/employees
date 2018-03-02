@@ -41,3 +41,6 @@ Person::show()
     cout << occupation() << "  " << firstName << "  " << name  << "  " << pesel << "  " << ((sex)==male ? "male" : "female") << "  " << address
          << "  " << number() << endl;
 }
+
+
+

@@ -29,6 +29,9 @@ public:
   void sortName();
   void sortPay();
   void modify(string pesel, int pay_, string address);
+
+private:
+
 };
 
 #endif

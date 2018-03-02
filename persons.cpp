@@ -33,8 +33,8 @@ Persons::save(const string fileName)
 
   if (file.good()) {
     for (auto p : m) {
-      file << p->occupation() << "  " << p->firstName << "  "  << p->name  << "  " 
-           << p->pesel << "  " << p->sex << "  " << p->address << "  " << p->number() << endl;
+      file << p->occupation() << "  " << p->get_firstName() << "  "  << p->get_name()  << "  " 
+           << p->get_pesel() << "  " << p->get_sex() << "  " << p->get_address() << "  " << p->number() << endl;
       file.flush();
     };
     file.close();
@@ -53,7 +53,7 @@ Persons::show()
 pp
 Persons::findPersonPesel(string peselNumber)
 {
-  auto it = find_if(m.begin(), m.end(), [peselNumber] (const pp p) { return p->pesel == peselNumber;});
+  auto it = find_if(m.begin(), m.end(), [peselNumber] (const pp p) { return p->get_pesel() == peselNumber;});
   if (it != m.end()) {
     cout << "Found Person:" << endl;
     (*it)->show();
@@ -66,7 +66,7 @@ Persons::findPersonPesel(string peselNumber)
 pp
 Persons::findPersonSurname(string surname)
 {
-  auto it = find_if(m.begin(), m.end(), [surname] (const pp p) { return p->name == surname;});
+  auto it = find_if(m.begin(), m.end(), [surname] (const pp p) { return p->get_name() == surname;});
   if (it != m.end()) {
     cout << "Found Person:" << endl;
     (*it)->show();
@@ -79,7 +79,7 @@ Persons::findPersonSurname(string surname)
 void
 Persons::deletePerson(string peselNumberOfErase)
 {
-  auto it = find_if(m.begin(), m.end(), [peselNumberOfErase] (const pp p) { return p->pesel == peselNumberOfErase;});
+  auto it = find_if(m.begin(), m.end(), [peselNumberOfErase] (const pp p) { return p->get_pesel() == peselNumberOfErase;});
   if (it != m.end()) {
     m.erase(it);
     cout << "A person deleted" << endl;
@@ -91,7 +91,7 @@ Persons::deletePerson(string peselNumberOfErase)
 
 //5. Wypełnianie bazy danych sztucznymi danymi (std::generate, std::fill) 
 string 
-randomString(int len)
+randomString(const unsigned int len)
 {
    string str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
    string newstr;
@@ -131,7 +131,7 @@ void
 Persons::sortPESEL() 
 {
   sort(m.begin(), m.end(), [](pp p1, pp p2) {
-        return p1->pesel < p2->pesel;   
+        return p1->get_pesel() < p2->get_pesel();   
   });
 }
 
@@ -139,7 +139,7 @@ void
 Persons::sortName() 
 {
   sort(m.begin(), m.end(), [](pp p1, pp p2) {
-        return p1->name < p2->name;   
+        return p1->get_name() < p2->get_name();   
   });
 }
 
@@ -160,11 +160,11 @@ Persons::sortPay()
 void
 Persons::modify(string pesel, int pay_, string address)
 {
-  auto it = find_if(m.begin(), m.end(), [pesel] (const pp p) { return p->pesel == pesel;});
+  auto it = find_if(m.begin(), m.end(), [pesel] (const pp p) { return p->get_pesel() == pesel;});
   if (it != m.end()) {
-    string firstName = (*it)->firstName;
-    string name = (*it)->name;
-    Sex sex = (*it)->sex;
+    string firstName = (*it)->get_firstName();
+    string name = (*it)->get_name();
+    Sex sex = (*it)->get_sex();
     m.erase(it);
     
     pp ptr = make_shared<Employee>(firstName, name, pesel, sex, address, pay_);
