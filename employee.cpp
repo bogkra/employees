@@ -9,18 +9,13 @@ Employee::Employee(string firstName,
                    string address,
                    int pay)
   : Person(firstName, name, pesel, sex, address)
-  , pay(pay)
-{
+  , pay(pay) {
 }
 
-string
-Employee::occupation()
-{
+string Employee::occupation() {
   return employee;
 }
 
-int
-Employee::number()
-{
+int Employee::number() {
   return pay;
 }

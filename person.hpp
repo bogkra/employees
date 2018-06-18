@@ -5,14 +5,12 @@
 
 using namespace std;
 
-enum Sex
-{
+enum Sex {
   female,
   male
 };
 
-class Person
-{
+class Person {
 public:
   Person(string firstName, string name, string pesel, Sex sex, string address);
   virtual string occupation() = 0;
@@ -38,8 +36,6 @@ private:
   bool checkDay();
  
   int year, month, day;
-  
-
 };
 
 typedef shared_ptr<Person> pp;

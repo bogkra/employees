@@ -7,8 +7,7 @@
 #include <memory>
 using namespace std;
 
-int main()
-{
+int main() {
   srand(time(0)); 
   const string file = "plik.txt";  
 

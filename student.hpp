@@ -5,8 +5,7 @@
 
 using namespace std;
 
-class Student : public Person
-{
+class Student : public Person {
 public:
   Student(string firstName,
           string name,

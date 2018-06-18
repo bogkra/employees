@@ -9,18 +9,13 @@ Student::Student(string firstName,
                  string address,
                  int number_index)
   : Person(firstName, name, pesel, sex, address)
-  , number_index(number_index)
-{
+  , number_index(number_index) {
 }
 
-string
-Student::occupation()
-{
+string Student::occupation() {
   return student;
 }
 
-int
-Student::number()
-{
+int Student::number() {
   return number_index;
 }

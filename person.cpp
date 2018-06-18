@@ -12,27 +12,21 @@ Person::Person(string firstName,
     name(name),
     pesel(pesel),
     sex(sex),
-    address(address)
-{
+    address(address) { 
 }
 
-bool 
-leapYear(int year)
-{
+bool leapYear(int year) {
   if (year % 4 == 0 and year % 100 != 0)
     return true;
   else
     return year % 400 == 0;
 }
 
-int toint(const char ch)
-{
+int toint(const char ch) {
   return ch - '0';
 }
 
-void
-Person::getDate()
-{
+void Person::getDate() {
   year  = 10 * toint(pesel[0]) + toint(pesel[1]);
   month = 10 * toint(pesel[2]) + toint(pesel[3]);
   day   = 10 * toint(pesel[4]) + toint(pesel[5]);
@@ -60,16 +54,13 @@ Person::getDate()
 
 
 bool 
-Person::checkMonth()
-{
+Person::checkMonth() {
   getDate();
 
   return month >= 1 and month <= 12;
 }
 
-bool 
-Person::checkDay()
-{
+bool Person::checkDay() {
   getDate();
   return
     (day >= 1 and day <= 31 and
@@ -93,14 +84,12 @@ Person::checkDay()
 }
 
 
-bool
-Person::validatePESEL()
-{
+bool Person::validatePESEL() {
   bool result = true;
 
   int p[11];
   for (int i = 0; i < 11; i++) {
-    result = (result and isdigit(pesel[i]));
+    result = result and isdigit(pesel[i]);
     p[i] = pesel[i] - '0';
   }
   return     result 
@@ -108,12 +97,9 @@ Person::validatePESEL()
          and (p[9] % 2 == (sex == male ? 1 : 0)))
          and checkMonth()
          and checkDay();
-
 }
 
-void 
-Person::show()
-{
+void Person::show() {
   cout << occupation() << "  " 
        << firstName << "  " 
        << name  << "  " 
@@ -122,6 +108,4 @@ Person::show()
        << address  << "  " 
        << number() << endl;
 }
-
-
 

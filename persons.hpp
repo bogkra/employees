@@ -12,8 +12,7 @@
 using namespace std;
 
 
-class Persons
-{
+class Persons {
 public:
   vector<pp> m;
 
@@ -31,7 +30,6 @@ public:
   void modify(string pesel, int pay_, string address);
 
 private:
-
 };
 
 #endif

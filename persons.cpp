@@ -2,9 +2,7 @@
 #include "persons.hpp"
 #include <algorithm>
 
-void
-Persons::downloadDatabase(const string fileName)
-{
+void Persons::downloadDatabase(const string fileName) {
   string occupation, firstName, name, pesel, address;
   int sex, number;
   ifstream file;
@@ -26,9 +24,7 @@ Persons::downloadDatabase(const string fileName)
   }
 }
 
-void
-Persons::save(const string fileName)
-{
+void Persons::save(const string fileName) {
   fstream file(fileName, ios::out);
 
   if (file.good()) {
@@ -41,18 +37,14 @@ Persons::save(const string fileName)
   };
 }
 
-void
-Persons::show()
-{
+void Persons::show() {
   cout << "Database:" << endl;
   for (auto p : m) 
     p->show();
   cout << endl;
 }
 
-pp
-Persons::findPersonPesel(string peselNumber)
-{
+pp Persons::findPersonPesel(string peselNumber) {
   auto it = find_if(m.begin(), m.end(), [peselNumber] (const pp p) { return p->get_pesel() == peselNumber;});
   if (it != m.end()) {
     cout << "Found Person:" << endl;
@@ -63,9 +55,7 @@ Persons::findPersonPesel(string peselNumber)
   return *it;
 }
 
-pp
-Persons::findPersonSurname(string surname)
-{
+pp Persons::findPersonSurname(string surname) {
   auto it = find_if(m.begin(), m.end(), [surname] (const pp p) { return p->get_name() == surname;});
   if (it != m.end()) {
     cout << "Found Person:" << endl;
@@ -76,9 +66,7 @@ Persons::findPersonSurname(string surname)
   return *it;
 }
 
-void
-Persons::deletePerson(string peselNumberOfErase)
-{
+void Persons::deletePerson(string peselNumberOfErase) {
   auto it = find_if(m.begin(), m.end(), [peselNumberOfErase] (const pp p) { return p->get_pesel() == peselNumberOfErase;});
   if (it != m.end()) {
     m.erase(it);
@@ -90,9 +78,7 @@ Persons::deletePerson(string peselNumberOfErase)
 
 
 //5. Wypełnianie bazy danych sztucznymi danymi (std::generate, std::fill) 
-string 
-randomString(const unsigned int len)
-{
+string randomString(const unsigned int len) {
    string str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
    string newstr;
    int pos;
@@ -103,49 +89,37 @@ randomString(const unsigned int len)
    return newstr;
 }
 
-Sex 
-randomSex()
-{
+Sex randomSex() {
   return (((rand() % 2) == 0) ? male : female);
 }
  
 
-void
-Persons::generate()
-{
+void Persons::generate() {
    std::generate(m.begin(), m.end(), [] () { 
             return make_shared<Student>(randomString(5), randomString(9), randomString(11), randomSex(), randomString(5), rand()); 
    } );
 }
 
-void
-Persons::fill()
-{
+void Persons::fill() {
    if ((rand() % 2) == 0)  
      std::fill(m.begin(), m.end(), make_shared<Employee>(randomString(5), randomString(9), randomString(11), randomSex(), randomString(5), rand()));
    else
      std::fill(m.begin(), m.end(), make_shared<Student>(randomString(5), randomString(9), randomString(11), randomSex(), randomString(5), rand()));
 }
 
-void
-Persons::sortPESEL() 
-{
+void Persons::sortPESEL() {
   sort(m.begin(), m.end(), [](pp p1, pp p2) {
         return p1->get_pesel() < p2->get_pesel();   
   });
 }
 
-void
-Persons::sortName() 
-{
+void Persons::sortName() {
   sort(m.begin(), m.end(), [](pp p1, pp p2) {
         return p1->get_name() < p2->get_name();   
   });
 }
 
-void
-Persons::sortPay() 
-{
+void Persons::sortPay() {
   sort(m.begin(), m.end(), [](pp p1, pp p2) {
  	if (p1->occupation() == "Student")
           return false;
@@ -157,9 +131,7 @@ Persons::sortPay()
 }
 
 //8. Modyfikacja zarobków i adresu po numerze PESEL 
-void
-Persons::modify(string pesel, int pay_, string address)
-{
+void Persons::modify(string pesel, int pay_, string address) {
   auto it = find_if(m.begin(), m.end(), [pesel] (const pp p) { return p->get_pesel() == pesel;});
   if (it != m.end()) {
     string firstName = (*it)->get_firstName();
