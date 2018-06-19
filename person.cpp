@@ -12,7 +12,7 @@ Person::Person(string firstName,
     name(name),
     pesel(pesel),
     sex(sex),
-    address(address) { 
+    address(address) {
 }
 
 bool leapYear(int year) {
@@ -53,10 +53,8 @@ void Person::getDate() {
 }
 
 
-bool 
-Person::checkMonth() {
+bool Person::checkMonth() {
   getDate();
-
   return month >= 1 and month <= 12;
 }
 
@@ -104,7 +102,7 @@ void Person::show() {
        << firstName << "  " 
        << name  << "  " 
        << pesel << "  " 
-       << ((sex)==male ? "male" : "female")  << "  " 
+       << (sex==male ? "male" : "female")  << "  " 
        << address  << "  " 
        << number() << endl;
 }

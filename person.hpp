@@ -18,11 +18,11 @@ public:
   bool validatePESEL();
   void show();
 
-  string get_firstName() const { return firstName; }
-  string get_name() const { return name; }
-  string get_pesel() const { return pesel; }
-  Sex get_sex() const { return sex; }
-  string get_address() const { return address; }
+  string getFirstName() const { return firstName; }
+  string getName() const { return name; }
+  string getPesel() const { return pesel; }
+  Sex getSex() const { return sex; }
+  string getAddress() const { return address; }
 
 private:
   string firstName;

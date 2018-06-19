@@ -14,13 +14,14 @@ using namespace std;
 
 class Persons {
 public:
-  vector<pp> m;
+
+  void findPersonPesel(string peselNumber);
+  void findPersonSurname(string surname);
 
   void downloadDatabase(const string fileName);
   void save(const string fileName);
   void show();
-  pp findPersonPesel(string peselNumber);
-  pp findPersonSurname(string surname);
+
   void deletePerson(string peselNumberOfErase);
   void generate();
   void fill();
@@ -28,8 +29,11 @@ public:
   void sortName();
   void sortPay();
   void modify(string pesel, int pay_, string address);
+  vector<pp> & getM() {return m_;};
 
 private:
+  vector<pp> m_;
+
 };
 
 #endif

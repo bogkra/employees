@@ -13,8 +13,9 @@ public:
           Sex sex,
           string address,
           int number_index);
+private:
   int number_index;
-  string student = "Student";
+  const string student = "Student";
   int number();
   string occupation();
 };

@@ -13,8 +13,9 @@ public:
            Sex sex,
            string address,
            int pay);
+private:
   int pay;
-  string employee = "Employee";
+  const string employee = "Employee";
   int number();
   string occupation();
 };
